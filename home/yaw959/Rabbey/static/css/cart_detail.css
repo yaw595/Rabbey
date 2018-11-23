@@ -1,0 +1,57 @@
+
+/*Navbar*/
+#nav1 {
+  background-color: #000 !important;
+}
+ #mycart {
+   margin-top: 6%;
+ }
+
+
+.bdg {
+    display: flex;
+    content-align: right;
+    background: #000;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: light !important;
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+thead  {
+    background-color: #000;
+}
+
+#tbtm, th {
+    color: #ff00cc;
+}
+
+#btns > i {
+    margin: 0 10px;
+}
+
+#btns {
+    border: none;
+    border-radius: 100px;
+    margin-right: 10px;
+    background: #fff;
+    color: #000;
+    font-size: 15px;
+    padding: 10px 20px;
+    font-weight: bold;
+     box-shadow: 0 2px 2px rgba(0,0,0,0.10)
+}
+
+
+#btns:hover {
+    background: #000;
+    color: #f0c;
+    font-size: 15px;
+    transition: all ease-in-out 0.25s;
+}
+
+#btns:focus {
+    outline: none;
+}

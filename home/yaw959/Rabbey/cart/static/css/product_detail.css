@@ -1,0 +1,56 @@
+
+/*Navbar*/
+#nav1 {
+  background-color: #000000 !important;
+}
+
+#btns > i {
+    margin-right: 15px;
+}
+
+
+
+#btns {
+    border: none;
+    border-radius: 100px;
+    margin-right: 20px !important;
+    background: #fff;
+    color: #000;
+    font-size: 15px;
+    padding: 10px 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.10);
+    text-transform: uppercase;
+}
+
+
+#btns:hover {
+    background: #000;
+    color: #f0c;
+    transition: all ease-in-out 0.25s;
+}
+
+#btns:focus {
+    outline: none;
+}
+
+#pdtfm {
+    width: 100%;
+}
+
+.category {
+    color: #fff;
+    background: #000;
+    padding: 2px 15px;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.category:hover {
+    color: #ff00cc;
+    background: #000;
+    padding: 2px 15px;
+    border-radius: 5px;
+    font-weight: bolder;
+    text-decoration: none;
+}

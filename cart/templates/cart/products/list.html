@@ -1,0 +1,91 @@
+{% extends 'cart/base.html'%}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block style %}
+<link href="{% static 'css/storefront.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block cart-link %}
+{% endblock %}
+{% block content %}
+<div class="store-front animated fadeIn">
+    <header>
+        <div class="header-bg">
+            <div class="overlay"></div>
+            <div class="ltxt text-center">
+                <img class="pimg" id="pimg" src="{% static 'img/lg1.png' %}" alt="Logo"
+                     style="border-radius: 50%;
+               border: solid 2px #ff00cc;
+               padding: 20px;
+               width: 100px;
+               height: 100px;
+               margin-top: 0px;
+               margin-bottom: 20px;">
+                {% if category %}
+                <h1>Welcome To Our <strong>{{category.name}}</strong> Collection</h1>
+                <p id="msg">Scroll down to see the best of
+                    <strong style="color:#ff00cc">{{category.name}}</strong>
+                    and find just what you need to meet your fashion
+                    goals. We have all the lady needs to boost her style and confidence. Happy Shopping!!!
+                </p>
+                {% else %}
+                <h1>Welcome To Our Store Front</h1>
+                <p id="msg">Scroll down to browse through all our products and find all you need to meet your fashion
+                    goals. We have all the lady needs to boost her style and confidence. Happy Shopping!!!
+                </p>
+                {% endif %}
+                <p class="shop text-center">
+                    <button id="scrBtn" class="btn btn-primary" role="button">
+                        Start Shopping <i class="fa fa-chevron-circle-down" style="margin-left: 15px;"></i>
+                    </button>
+                    <div id="stc" class="stc"></div>
+                </p>
+                <div id="stc" class="stc" style="margin: 10px"></div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+    <div class="container">
+       <div id="list" class="row" style="margin-top: 6%">
+        {% for product in products %}
+        <div class="col-md-3 card-flow">
+            <div class="card shadow-sm">
+                <a href="{{ product.get_absolute_url }}">
+                    <img class="card-image-top"
+                         src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}"
+                         alt="...">
+                </a>
+                <div class="card-block text-center">
+                    <h6 class="text-center" style="margin: 10px">
+                        <a href="{{ product.get_absolute_url }}" style="color: orangered; font-weight: 400">{{ product.name }}</a>
+                    </h6>
+                    <p style="margin: 2px; font-size: 13px; font-weight: 500">GHC. {{ product.price }}</p>
+                    {% if product.discount > 0 %}
+                    <p class="discount">-{{ product.discount }}%</p>
+                    {% else %}
+                    <p class="discount"><i class="mdi mdi-emoticon-happy"></i></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+        <div id="trnd" class="caption text-left" style="margin-top: 9%">
+        <h4><i class="mdi mdi-format-list-bulleted"></i> Categories</h4>
+        <p>Quickly find your favourite items by clicking the "SHOP NOW" buttons in any of the categories below</p>
+        </div>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-md-3 text-center">
+                        <a href="{{ category.get_absolute_url }}" class="btn btn-primary cat shadow-sm" role="button"><i class="fa fa-tags" style="margin-right: 15px"></i> {{category.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+{% endblock %}cd

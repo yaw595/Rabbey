@@ -1,0 +1,138 @@
+
+/*Navbar*/
+#nav1 {
+  background-color: #000000 !important;
+}
+
+
+#btns > i {
+    margin-right: 15px;
+}
+
+
+
+#btns {
+    border: none;
+    border-radius: 100px;
+    margin-right: 5px !important;
+    background: red;
+    background: -webkit-linear-gradient(left, #ff00be, purple);
+    background: -o-linear-gradient(right, #ff00be, purple);
+    background: -moz-linear-gradient(right, #ff00be, purple);
+    background: linear-gradient(to right, #ff00be, purple);
+    color: #fff;
+    font-size: 15px;
+    padding: 5px 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.10);
+}
+
+
+#btns:hover {
+    background: #fff;
+    color: #f0c;
+    transition: all ease-in-out 0.25s;
+}
+
+#btns:focus {
+    outline: none;
+}
+
+#pdtfm {
+    width: 100%;
+}
+
+.category {
+    color: #fff;
+    background: orangered;
+    padding: 2px 20px;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.category:hover {
+    color: #f0c;
+    background: white;
+    padding: 2px 20px;
+    border-radius: 5px;
+    font-weight: bolder;
+    text-decoration: none;
+    transition: ease-in-out 0.5s;
+}
+
+#cardImg {
+    margin: 0 !important;
+    padding: 0;
+    border: none;
+    border-radius: 5px !important;
+    box-shadow: 10px 10px 10px -7px rgba(0, 0, 0, 0.2);
+}
+
+
+#ocd {
+   background: #fff;
+   padding: 5px;
+}
+
+.cat {
+    background: orangered;
+    border: none;
+    border-radius: 150px;
+    padding: 10px 30px;
+    color: white;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.cat:hover {
+    background: #fff;
+    color: #f0c;
+    transition: all ease-in-out 0.5s;
+}
+
+/*Responsive*/
+@media screen and (max-width: 980px) {
+    .detail > h3 {
+        font-size: 20px;
+        margin-top: 35px;
+    }
+
+    .user-reviews {
+        margin-top: 45px;
+        font-size: 20px;
+    }
+
+    #btns {
+        font-size: 12px;
+    }
+
+    #pdtfm {
+        width: auto !important;
+        font-size: 12px;
+    }
+
+    .review > h1, .related > h1 {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .row-center {
+    display: flex !important;
+    justify-content: center !important;
+    text-align: center !important;
+    }
+
+    .form-checkout {
+        width: 150px !important;
+        margin-right: 20px !important;
+    }
+
+    .cat {
+        width: 95%;
+        margin: 10px;
+        padding: 5px 30px;
+    }
+}

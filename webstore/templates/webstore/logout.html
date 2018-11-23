@@ -1,0 +1,54 @@
+{% extends 'cart/base.html' %}
+{% load static %}
+
+
+
+    <head>
+        {% block style %}
+        <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+        {% endblock %}
+    </head>
+
+    <body>
+    {% block cart-link %}
+    {% endblock %}
+        {% block content %}
+        <main role="main expanded-lg">
+
+      <header>
+        <div class="header-bg">
+          <div class="overlay"></div>
+          <div class="ltxt text-center">
+              <h4><i class="fa fa-check-circle" style="color: #00ff00;"></i> Logged Out successfully</h4>
+            <p id="pmsg">You can click the button below to Login</p>
+              <form>
+                  <a href="{% url 'login' %}" id="lbtn" class="btn btn-lg">
+                      Login
+                      <i class="fa fa-chevron-circle-right"></i>
+                  </a>
+              </form>
+              <p style="font-size: 13px; margin-top: 50px;">
+                  OR Go back to
+                  <a href="{% url 'home' %}"
+                  style="color: #ff00cc;
+                  font-weight: bolder;
+                  font-size: 15px;
+                  text-decoration: none;
+                  margin-left: 10px;
+                  background: #000;
+                  border-radius: 5px;
+                  padding-left: 10px;
+                  padding-right: 10px;">
+
+                  Home
+                  <i class="fa fa-home"></i>
+                  </a>
+              </p>
+          </div>
+        </div>
+      </header>
+        </main>
+        {% endblock %}
+    </body>
+
+

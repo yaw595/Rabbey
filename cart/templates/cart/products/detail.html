@@ -1,0 +1,170 @@
+{% extends 'cart/base.html'%}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }} {% else %} Products {% endif %}
+{% endblock %}
+{% block style %}
+<link href="{% static 'css/product_detail.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+{% block content %}
+<div class="stc"></div>
+        <div class="container">
+        <div class="row" style="margin-top: 5%">
+            <div class="col-md-12">
+                <div class="card shadow-sm" style="width: 100%;">
+                    <div class="card-body">
+                        <div class="col-md-6 pull-left">
+                            <div id="cardImg" class="card animated bounceIn shadow-sm" >
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"><img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..."></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"><img src="{% if product.image %} {{ product.image_1.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..."></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"><img src="{% if product.image %} {{ product.image_2.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..."></li>
+                                    <li data-target="#myCarousel" data-slide-to="3"><img src="{% if product.image %} {{ product.image_3.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..."></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="card-img" src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="card-img" src="{% if product.image %} {{ product.image_1.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="card-img" src="{% if product.image %} {{ product.image_2.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="card-img" src="{% if product.image %} {{ product.image_3.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="...">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="mdi mdi-arrow-left-drop-circle-outline mdi-24px" aria-hidden="true" style="color: orangered;"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="mdi mdi-arrow-right-drop-circle-outline mdi-24px" aria-hidden="true" style="color: orangered"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                                </div>
+                            </div>
+                    </div>
+                        <div class="detail col-md-6 pull-right text-justify">
+                            <h3>{{ product.name }} <hr></h3>
+                            <h6><a class="category shadow-sm" href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h6>
+                            {% if product.discount > 0 %}
+                                <p class="discount pull-right" style="font-size: 12px">-{{ product.discount }}%</p>
+                            {% else %}
+                                <p class="discount pull-right"><i class="mdi mdi-emoticon-happy"></i></p>
+                            {% endif %}
+                            <p class="text-muted">GHC. {{ product.price }}</p>
+                            <p class="description">{{ product.description }}</p>
+                            <form id="pdtfm" action="{% url "mycart:mycart_add" product.id %}" method="post">
+                                {% csrf_token %}
+                                {{ mycart_product_form }}
+                                <button id="btns" type="submit" class="btn btn-primary pull-right"><i class="fa fa-cart-plus"></i> Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+  <div class="container">
+            <div class="row row-center" style="margin-top: 9%">
+                <h1 class="user-reviews"><i class="mdi mdi-comment-check" style="color: #f0c"></i> Reviews</h1>
+                <div id="ocd" class=" col-md-12 card shadow-sm">
+                    <div class="card-body">
+                        <div class="col-md-6 pull-left">
+                      <form class="form-checkout" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for error in form.non_field_errors %}
+                        <div class="form-group has-errors text-danger small">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                        {% for field in form %}
+                        <div class="form-group has-errors text-danger small">
+                            {{ field.errors }}
+                        </div>
+                        <div class="form-group has-errors text-danger small">
+                        </div>
+                        <div class="form-group">
+                            {{ field }}
+                        </div>
+                        {% endfor %}
+                        <button id="btns" class="btn shadow-sm" type="submit">
+                            Submit Review  <i class="mdi mdi-comment-plus-outline"></i>
+                        </button>
+                    </form>
+                      </div>
+                    <div class="col-md-6 pull-right">
+                        <h3 class="user-reviews"><i class="mdi mdi-comment-text-outline"></i> Customer Reviews</h3>
+                        <hr>
+                        {% for review in product.review.all %}
+                        {% if review.approved %}
+                        <p class="text-justify">
+                            <strong style="font-size: 15px"><i class="mdi mdi-comment-check-outline" style="color: #00ff00"></i> {{review.name}}</strong>
+                            <span class="" style="font-size: 15px; font-weight: bold; margin-left: 5px;">
+                                says
+                            </span><br>
+                            <span style="font-size: 15px;">{{review.text}}</span><br>
+                            <span class="text-muted" style="font-size: 10px; font-weight: bold">
+                                {{review.created_at.date}},
+                            </span>
+                            <span class="text-muted" style="font-size: 10px; font-weight: bold; margin-left: 5px;">
+                                {{review.created_at.time}}
+                            </span>
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="related" style="margin-top: 9%">
+                <h1><i class="mdi mdi-fire" style="color: #f0c"></i> Trending</h1>
+                <div class="container">
+                    <div class="row">
+                  {% for product in products|slice:":10"  %}
+                  {% if product.featured %}
+                      <div class="col-md-3 card-flow">
+                        <div class="card shadow-sm">
+                            <a href="{{ product.get_absolute_url }}">
+                                <img class="card-image-top" src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="...">
+                            </a>
+                            <div class="card-block text-center">
+                                <h6 class="text-center" style="margin: 10px">
+                                    <a href="{{ product.get_absolute_url }}" style="color: orangered; font-weight: bold">{{ product.name }}</a>
+                                </h6>
+                                <p style="margin: 2px; font-size: 13px; font-weight: 500">GHC. {{ product.price }}</p>
+                                {% if product.discount > 0 %}
+                                <p class="discount">-{{ product.discount }}%</p>
+                                {% else %}
+                                <p class="discount"><i class="mdi mdi-emoticon-happy"></i></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                      </div>
+                  {% endif %}
+                  {% endfor %}
+              </div>
+                </div>
+            </div>
+
+        <div id="trnd" class="caption text-left" style="margin-top: 9%">
+        <h4><i class="mdi mdi-format-list-bulleted"></i> Categories</h4>
+        <p>Quickly find your favourite items by clicking the "SHOP NOW" buttons in any of the categories below</p>
+        </div>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-sm-3 text-center">
+                        <a href="{{ category.get_absolute_url }}" class="btn btn-primary cat shadow-sm" role="button"><i class="fa fa-tags" style="margin-right: 15px"></i> {{category.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+
+        {% endblock %}

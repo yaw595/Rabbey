@@ -1,0 +1,54 @@
+{% extends 'cart/base.html' %}
+{% load static %}
+
+
+<head xmlns="http://www.w3.org/1999/html">
+        {% block style %}
+        <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+        {% endblock %}
+    </head>
+    <body>
+    {% block cart-link %}
+    {% endblock %}
+    {% block content %}
+    <main role="main expanded-lg">
+      <header>
+        <div class="header-bg">
+          <div class="overlay"></div>
+          <div class="ltxt text-center">
+            <h4>Log In</h4>
+            <p id="pmsg">Log in here and start shopping</p>
+              <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+              <p class="fp" style="font-size: 12px">
+              Can't Remember Password?
+              <a href="{% url 'reset_password' %}"
+              style="color: #ff00cc;
+              font-weight: bolder;
+              font-size: 12px;
+              text-decoration: none;
+              margin-left: 10px;
+              background: #000;
+              border-radius: 5px;
+              padding-left: 10px;
+              padding-right: 10px;">Reset Password</a>
+              </p>
+              <p class="fp" style="font-size: 12px">
+                  <label id="chk" class="form-check-label" style="font-size: 12px; color: white">
+                  <input type="checkbox" class="form-check-input">
+                  Remember me
+              </label>
+              </p>
+              <button id="lbtn" class="btn btn-lg" type="submit" style="margin-right: 10px;">Login <i class="fa fa-chevron-circle-right"></i></button>
+              <a href="{% url 'register' %}" id="lbtn" class="btn btn-lg">
+                Signup
+                <i class="fa fa-chevron-circle-right"></i>
+              </a>
+              </form>
+          </div>
+        </div>
+      </header>
+    </main>
+    {% endblock %}
+    </body>

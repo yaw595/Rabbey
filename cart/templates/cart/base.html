@@ -1,0 +1,369 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="">
+    {% block title %}
+  <title>Rabbey</title>
+    {% endblock %}
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  <link href= "{% static 'css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+  <link href= "{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
+    <link href= "{% static 'materialdesign/css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css">
+
+  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Berkshire+Swash|Cairo|Lobster|Lobster+Two|Maven+Pro|Pontano+Sans" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">
+    {% block style %}
+    {% endblock %}
+  <!--JavaScript Dependencies -->
+</head>
+
+<body>
+    {% block nav %}
+  <nav id="nav1" class="navbar navbar-expand-md navbar-dark fixed-top">
+      <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'img/lg1.png' %}" alt="Logo"> Rabbey's</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTop">
+        {% if user.is_authenticated %}
+        <ul id="it1" class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}"><i class="mdi mdi-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url "mycart:mycart_detail" %}"><i class="mdi mdi-cart"></i> Cart
+              <span class="badge badge-primary badge-pill text-center" style="
+              background: none;
+              color: orangered;
+              font-size: 15px">
+                  {% with totail_items=mycart|length %}
+                  {% if mycart|length > 0 %}
+                  {{ totail_items }}
+                  {% else %}
+                  0
+                  {% endif %}
+                  {% endwith %}
+              </span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-fire"></i> Hot</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+                {% for category in categories %}
+              <a class="dropdown-item" href="{{category.get_absolute_url}}">{{category.name}}</a>
+                {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-phone"></i> Contact Us</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+              <a class="dropdown-item" href="#">Customer Service</a>
+              <a class="dropdown-item" href="#">Our Team</a>
+              <a class="dropdown-item" href="#">Our Warehouse</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a id="modtog" class="nav-link" href="#" data-toggle="modal" data-target="#accModal"><i class="mdi mdi-account-circle"></i> Profile</a>
+          </li>
+        </ul>
+
+        {% else %}
+        <ul id="it1" class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}"><i class="mdi mdi-home"></i> Home</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "mycart:mycart_detail" %}"><i class="mdi mdi-cart"></i> Cart
+              <span class="badge badge-primary badge-pill text-center" style="
+              background: none;
+              color: orangered;
+              font-size: 15px">
+                  {% with totail_items=mycart|length %}
+                  {% if mycart|length > 0 %}
+                  {{ totail_items }}
+                  {% else %}
+                  0
+                  {% endif %}
+                  {% endwith %}
+              </span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-fire"></i> Hot</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+                {% for category in categories %}
+              <a class="dropdown-item" href="{{category.get_absolute_url}}">{{category.name}}</a>
+                {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-phone"></i> Contact Us</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+              <a class="dropdown-item" href="#">Customer Service</a>
+              <a class="dropdown-item" href="#">Our Team</a>
+              <a class="dropdown-item" href="#">Our Warehouse</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a id="modtog" class="nav-link" href="#" data-toggle="modal" data-target="#accModal"><i class="mdi mdi-account-circle"></i> Account</a>
+          </li>
+        </ul>
+        {% endif %}
+        <form id="fm" class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search...">
+        </form>
+        <button id="sch" class="btn btn-primary" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav text-center">
+          <li class="nav-item">
+              <a id="nbtn" class="btn btn-disabled btn-lg " role="button">
+              {{user}}
+              </a>
+          </li>
+          <li class="nav-item">
+              <a id="nbtn"  href="{% url 'logout' %}" class="btn btn-primary btn-lg" role="button">
+              Logout
+            </a>
+          </li>
+      </ul>
+      {% else %}
+    <ul class="navbar-nav text-center">
+              <li class="nav-item">
+                  <a id="nbtn"  href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">
+                  Log In
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a id="nbtn"  href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button">
+                  Sign UP
+                </a>
+              </li>
+          </ul>
+      {% endif %}
+      </div>
+  </nav>
+    {% endblock %}
+
+
+    {% block cart-link %}
+    {% if user.is_authenticated %}
+    <div class="container">
+    <div class="row" style="margin-top: 10%">
+         <button id="ctbtn" class="btn btn-primary" style="background: rgba(0,0,0,0.5) !important;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    padding: 5px 20px;
+    font-weight: bold;">
+            {% with totail_items=mycart|length %}
+                {% if mycart|length > 0 %}
+                    My Shopping Order:
+                    <a href="{% url "mycart:mycart_detail" %}" style="color: #ffffff; margin-left: 10px; font-weight: lighter;">
+                        {{ totail_items }} item{{ totail_items|pluralize }}, GHC. {{ mycart.get_total_price }}
+                    </a>
+                    {% else %}
+                    Your cart is empty at the moment.
+                {% endif %}
+            {% endwith %}
+         </button>
+    </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% block mod %}
+  <div class="modal fade" id="accModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="cover"></div>
+        <p class="close text-right" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-close"></i>
+        </p>
+        <div class="modal-body text-center">
+          {% if user.is_authenticated %}
+          <h5 class="modal-title text-center" id="ModalLabel">Profile</h5>
+          <img class="pimg" id="pimg" src="{% static 'img/P-img.png' %}" alt="Logo"
+               style="border-radius: 100px;
+               width: 120px;
+               height: 120px;
+               margin: 20px;">
+          <p class="user text-center" style="font-size: 20px;
+          color: white;
+          text-transform: capitalize;">
+           {{user}}
+          </p>
+          <p class="user text-center" style="text-transform: lowercase;
+          color: white">
+            {{user.email}}
+          </p>
+          <p class="fp" style="font-size: 12px;
+          color: white;
+          margin-top: 20px;">
+            Click here to
+            <a href="{% url 'change_password' %}"
+            style="color: #ff00cc;
+            font-weight: bolder;
+            font-size: 12px;
+            text-decoration: none;
+            margin-left: 10px;
+            background: #000;
+            border-radius: 5px;
+            padding-left: 10px;
+            padding-right: 10px;">Change Password</a>
+          </p>
+          <p class="fp" style="font-size: 12px;
+          color: white;">
+            Click here to
+            <a href="{% url 'edit_profile' %}"
+            style="color: #ff00cc;
+            font-weight: bolder;
+            font-size: 12px;
+            text-decoration: none;
+            margin-left: 10px;
+            background: #000;
+            border-radius: 5px;
+            padding-left: 10px;
+            padding-right: 10px;">Update Profile info</a>
+          </p>
+          <p class="btn">
+            <a href="{% url 'logout' %}" class="btn btn-primary btn-lg" role="button">
+              Log Out
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button">
+              Sign Up
+            </a>
+          </p>
+          {% else %}
+          <h5 class="modal-title text-center" id="ModalLabel">Welcome!</h5>
+          <img class="pimg" id="pimg" src="{% static 'img/lg1.png' %}" alt="Logo"
+               style="border-radius: 50%;
+               width: 120px;
+               height: 120px;
+               border: solid #ff00cc 2px;
+               padding: 20px;
+               margin: 20px;">
+          <p class="user text-center"
+               style="font-size: 13px;
+               margin: 50px;
+               color: white;
+               text-transform: capitalize;">
+           Dear Customer, You are currently not logged in. please click one of the buttons below to either Log in
+           [ if you already have an account ] or Sign Up [ if you are new ]. Happy
+            shopping !!!
+          </p>
+          <p class="btn">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">
+              Log In
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button">
+              Sign Up
+            </a>
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endblock %}
+
+    {% block content %}
+<main role="main expanded-lg">
+    <div class="container text text-center">
+        <h1 class="main-text" style="font-size: 200px; font-family: Lobster; position: relative; margin-top: 150px">Main Content Here</h1>
+    </div>
+</main>>
+    {% endblock %}
+
+    {% block arrow %}
+<a href="#" id="btt"><i class="fa fa-angle-up fa-3x"></i></a>
+    {% endblock %}
+
+    {% block foot %}
+<footer class="footer">
+  <div id="foot" class="container">
+  <div class="row">
+  <div id="foot" class="col-md-4">
+            <h6>Categories</h6>
+            <hr id="fh">
+            <ol class="list-unstyled">
+                <a href="{% url 'cart:product_list' %}">All Products</a>
+                {% for category in categories %}
+              <li class="active">
+                  <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+              </li>
+                {% endfor %}
+            </ol>
+  </div>
+
+<div id="foot" class="col-md-4">
+<h6>Contact Us:</h6>
+<hr id="fh">
+<p><i class="fa fa-phone"></i>  +233 243 187 629 or +233 240 159 895</p>
+<p><i class="fa fa-envelope"></i>  rabbryscollection@gmail.com</p>
+<p><i class="fa fa-globe"></i>  www.rabbeys.store.com</p>
+<h6 class="locate"><i class="fa fa-map-marker"></i> Locate us:</h6>
+<hr id="fh">
+<p class="location-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
+<div id="foot" class="col-md-4">
+  <h6>Stay Connected:</h6>
+  <hr id="fh">
+  <a href="#"><i class="social fa fa-facebook fa-lg "></i></a>
+  <a href="#"><i class="social fa fa-twitter fa-lg"></i></a>
+  <a href="#"><i class="social fa fa-instagram fa-lg"></i></a>
+  <a href="#"><i class="social fa fa-linkedin fa-lg"></i></a>
+  <a href="#"><i class="social fa fa-whatsapp fa-lg"></i></a>
+  <a href="#"><i class="social fa fa-youtube-play fa-lg"></i></a>
+  <div class="logo text-center">
+  <img class="pimg" id="pimg" src="{% static 'img/lg1.png' %}" alt="Logo"
+               style="border-radius: 100px;
+               border: solid 2px #ff00cc;
+               padding: 20px;
+               width: 100px;
+               height: 100px;
+               margin-top: 100px;
+               margin-bottom: 20px;">
+</div>
+</div>
+</div>
+</div>
+</footer>
+    {% endblock %}
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+
+    {% block js %}
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery-slim.min.js' %}"><\/script>')
+  </script>
+  <script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/vendor/jquery-slim.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js/wow.js' %}"></script>
+  <script src="{% static 'js/wow.min.js' %}"></script>
+
+<script>
+    new WOW().init();
+</script>
+    {% endblock %}
+</body>
+</html>

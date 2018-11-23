@@ -1,0 +1,62 @@
+{% extends 'cart/base.html' %}
+{% load static %}
+{% block title %}
+    Your Shopping Cart| Checkout
+{% endblock %}
+{% block style %}
+<link href="{% static 'css/order.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block cart-link %}
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row row-center">
+            <div class="col-md-4" style="margin-top: 5%">
+                <h1 class="page-header">Checkout</h1>
+                <div id="ocd" class="card">
+                <form class="form-checkout" enctype="multipart/form-data" method="POST" style="justify-content: center !important; text-align: center !important;">
+                  {% csrf_token %}
+                  {% for error in form.non_field_errors %}
+                  <div class="form-group has-errors text-danger small">
+                      {{ error }}
+                  </div>
+                  {% endfor %}
+                  {% for field in form %}
+                  <div class="form-group has-errors text-danger small">
+                      {{ field.errors }}
+                  </div>
+                  <div class="form-group has-errors text-danger small">
+                  </div>
+                  <div class="form-group">
+                      {{ field }}
+                  </div>
+                  {% endfor %}
+                    <span style="font-size: 12px; margin: 1px; color: #000"><i class="fa fa-upload"></i> Upload <strong class="text-danger">Brand/Special</strong> image (Souvenir Order only)  </span>
+                  <button id="lbtn" class="btn btn-lg" type="submit" style="margin-right: 10px;">Submit Order <i class="fa fa-chevron-circle-right"></i></button>
+              </form>
+            </div>
+            </div>
+            <div class="col-md-4" style="margin-top: 8%">
+                <div class="page-header">
+                    <h5>Your Order</h5>
+                </div>
+                <ul class="list-group">
+                    {% for item in mycart %}
+                        <li class="list-group-item" style="background: rgba(225, 225, 225, 0.5);">
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>GHC. {{ item.total_price }}</span>
+                        </li>
+                    {% endfor %}
+
+                <li class="list-group-item active" style="background: rgba(0, 0, 0, 0.5); color: #ff00cc; font-weight: bolder;">Total Cost: GHC. {{ mycart.get_total_price }}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+        </div>
+{% endblock %}

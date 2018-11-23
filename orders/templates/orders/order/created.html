@@ -1,0 +1,45 @@
+{% extends 'cart/base.html' %}
+{% load static %}
+{% block title %}
+    Your Shopping Cart| Thank you
+{% endblock %}
+{% block style %}
+<link href="{% static 'css/created.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block cart-link %}
+{% endblock %}
+
+{% block content %}
+<div class="store-front animated fadeIn">
+    <header>
+        <div class="header-bg">
+            <div class="overlay"></div>
+            <div class="ltxt text-center">
+                <img class="pimg" id="pimg" src="{% static 'img/lg1.png' %}" alt="Logo"
+                     style="border-radius: 50%;
+               border: solid 2px #ff00cc;
+               padding: 20px;
+               width: 100px;
+               height: 100px;
+               margin-top: 0px;
+               margin-bottom: 20px;">
+                <h1>Thank You For Shopping With Us</h1>
+            <p>Your order has been successfully completed. Your order number is <strong style="color: #ff00cc;"> {{ order.id }}</strong>.</p>
+
+            <p>
+            <a id="btns" href="{% url 'home' %}" class="btn btn-primary btn-lg actions">
+                <i class="mdi mdi-home-circle" style="margin-right: 15px"></i>
+                Return Home
+            </a>
+            <a id="btns" href="{% url "cart:product_list" %}" class="btn btn-primary btn-lg">
+                Continue Shopping
+                <i class="fa fa-arrow-right" style="margin-left: 15px"></i>
+            </a>
+            </p>
+            </div>
+        </div>
+    </header>
+</div>
+
+{% endblock %}
