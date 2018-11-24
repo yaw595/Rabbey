@@ -15,7 +15,7 @@
     margin-top: 40px;
     margin-bottom: 20px;
     color: #fff;
-    font-weight: light !important;
+    font-weight: 500 !important;
     border-radius: 50px;
     padding: 10px 20px;
 }
@@ -28,27 +28,30 @@ thead  {
     color: #ff00cc;
 }
 
-#btns > i {
-    margin: 0 10px;
+.cartBtn {
+    margin: 0 30px;
 }
+
 
 #btns {
     border: none;
     border-radius: 100px;
-    margin-right: 10px;
-    background: #fff;
-    color: #000;
-    font-size: 15px;
-    padding: 10px 20px;
+    margin: auto;
+    background: red;
+    background: -webkit-linear-gradient(left, #ff00be, purple);
+    background: -o-linear-gradient(right, #ff00be, purple);
+    background: -moz-linear-gradient(right, #ff00be, purple);
+    background: linear-gradient(to right, #ff00be, purple);
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 30px;
     font-weight: bold;
-    box-shadow: 0 2px 2px rgba(0,0,0,0.10)
 }
 
 
 #btns:hover {
-    background: #000;
+    background: #fff;
     color: #f0c;
-    font-size: 15px;
     transition: all ease-in-out 0.25s;
 }
 
@@ -58,13 +61,16 @@ thead  {
 
 @media screen and (max-width: 980px) {
     .cartBtn {
-        margin: 40px auto !important;
+        margin: auto !important;
         left: 0;
         right: 0;
-        display: flex;
         justify-content: center;
         text-align: center;
-        width: 70%;
+    }
+
+    .act {
+        margin: 10px 10px !important;
+        width: 70% !important;
     }
 
     .cart-head {
@@ -72,7 +78,20 @@ thead  {
         font-size: 25px;
     }
 
+    .delta{
+        padding: 5px 10px !important;
+        margin: 5px 0 !important;
+    }
+
+    .spec {
+        margin-left: 10px !important;
+    }
+
     .cart-head > span {
         font-size: 13px !important;
+    }
+
+    table {
+        font-size: medium;
     }
 }

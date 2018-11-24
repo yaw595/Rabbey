@@ -13,7 +13,7 @@
 {% block cart-link %}
 {% endblock %}
     <div class="container">
-        <div id="mycart" class="row" >
+        <div id="mycart" class="row row-center" >
         <h1 class="cart-head"><i class="mdi mdi-cart" style="color: #ff00cc"></i> Your Shopping Cart
             <span class="bdg" style="font-size: 15px; font-weight: bold;">
                 {% with totail_items=mycart|length %}
@@ -28,19 +28,20 @@
                 {% endwith %}
             </span>
         </h1>
-            <div class="table-responsive">
+            <div class="container">
+                <div class="table-responsive flex-row">
                 <table class="table table-striped table-hover">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>Image</th>
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Remove</th>
-                        <th>Unit Price</th>
-                        <th>Price</th>
+                        <th>Unit</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-center">
                 {% for item in mycart %}
                     {% with product=item.product  %}
                         <tr>
@@ -51,15 +52,15 @@
                             </td>
                             <td>{{ product.name }}</td>
                             <td>
-                                <form action="{% url "mycart:mycart_add" product.id %}" method="post" style="display: inline-block">
+                                <form action="{% url "mycart:mycart_add" product.id %}" method="post" style="display: flex">
                                     {% csrf_token %}
                                     {{ item.update_quantity_form.quantity }}
                                     {{ item.update_quantity_form.update }}
-                                <button id="btns" class="btn btn-primary" type="submit" value="Update"><i class="fa fa-refresh"></i> Update</button>
+                                <button id="btns" class="btn btn-primary delta spec" type="submit" value="Update"><i class="fa fa-refresh"></i> Update</button>
                                 </form>
                             </td>
                             <td>
-                                <a id="btns" class="btn btn-primary" href="{% url "mycart:mycart_remove" product.id %}"><i class="fa fa-trash"></i> Remove</a>
+                                <a id="btns" class="btn btn-primary delta" href="{% url "mycart:mycart_remove" product.id %}"><i class="fa fa-trash"></i> Remove</a>
                             </td>
                             <td>GHC. {{ item.price }}</td>
                             <td>GHC. {{ item.total_price }}</td>
@@ -67,16 +68,17 @@
                     {% endwith %}
                 {% endfor %}
                 <tr style="background-color: #000">
-                    <td id="tbtm"><b>Total</b></td>
+                    <td id="tbtm"><b>Grand Total</b></td>
                     <td colspan="4"></td>
                     <td id="tbtm" colspan="num"><b>GHC. {{ mycart.get_total_price }}</b></td>
                 </tr>
                 </tbody>
             </table>
             </div>
+            </div>
         <p class="cartBtn">
-            <a id="btns" href="{% url "cart:product_list" %}" class="btn btn-primary"> Continue Shopping <i class="fa fa-arrow-right"></i></a>
-            <a id="btns" href="{% url "orders:order_create" %}" class="btn btn-primary"> <i class="fa fa-shopping-basket"></i> Checkout</a>
+            <a id="btns" href="{% url "cart:product_list" %}" class="btn btn-primary shadow-sm act"> Continue Shopping <i class="fa fa-arrow-right"></i></a>
+            <a id="btns" href="{% url "orders:order_create" %}" class="btn btn-primary shadow-sm act" style="margin-left: 20px"> <i class="fa fa-shopping-basket"></i> Checkout</a>
         </p>
         </div>
     </div>

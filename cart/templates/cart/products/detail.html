@@ -53,9 +53,9 @@
                             <h3>{{ product.name }} <hr></h3>
                             <h6><a class="category shadow-sm" href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h6>
                             {% if product.discount > 0 %}
-                                <p class="discount pull-right" style="font-size: 12px">-{{ product.discount }}%</p>
+                                <p class="discount pull-right text-center" style="font-size: 12px">-{{ product.discount }}%</p>
                             {% else %}
-                                <p class="discount pull-right"><i class="mdi mdi-emoticon-happy"></i></p>
+                                <p class="discount pull-right text-center"><i class="mdi mdi-emoticon-happy"></i></p>
                             {% endif %}
                             <p class="text-muted">GHC. {{ product.price }}</p>
                             <p class="description">{{ product.description }}</p>
@@ -137,7 +137,7 @@
                             </a>
                             <div class="card-block text-center">
                                 <h6 class="text-center" style="margin: 10px">
-                                    <a href="{{ product.get_absolute_url }}" style="color: orangered; font-weight: bold">{{ product.name }}</a>
+                                    <a href="{{ product.get_absolute_url }}" style="color: orangered; font-weight: 400">{{ product.name }}</a>
                                 </h6>
                                 <p style="margin: 2px; font-size: 13px; font-weight: 500">GHC. {{ product.price }}</p>
                                 {% if product.discount > 0 %}
